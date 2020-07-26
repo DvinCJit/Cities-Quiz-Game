@@ -39,4 +39,4 @@ For more information about React check out the readme on the 'cities-quiz' folde
 ### Mapbox
 
 The access token provided in this project is personal and will expire after finishing the interview process for which this project was built.
-To be able to run this application correctly or for future projects you might want to sign up to [Mapbox](https://www.mapbox.com/) and get your own access token.
+To be able to run this application correctly or for future projects you might want to consider signing up to [Mapbox](https://www.mapbox.com/) and getting your own access token.
