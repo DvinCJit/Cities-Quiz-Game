@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import api from "../api";
 import history from "../history";
-// import { Modal, Button } from "react-bootstrap";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoianVkaXRocm4iLCJhIjoiY2pqZWZhaWh5Mm83ZjNxbW14YjYwY3BvdSJ9.dzLHt6jQRGlNH9jFAdhkbg";
@@ -10,7 +9,7 @@ mapboxgl.accessToken =
 class GameScreen extends Component {
   constructor(props) {
     super(props);
-    this.handleClose = this.handleClose.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
     this.state = {
       result: "",
       modalText: "",
@@ -74,6 +73,14 @@ class GameScreen extends Component {
       this.setState({ modalText: "You run out of kilometres!" });
       this.fetchHighScore();
       this.setState({ modalClass: "modal-visible fade" });
+    } else if (
+      this.state.play.placed_cities.length === 8 &&
+      this.state.play.score !== 9
+    ) {
+      this.setState({ result: "Game Over" });
+      this.setState({ modalText: "Those were all the cities!" });
+      this.fetchHighScore();
+      this.setState({ modalClass: "modal-visible fade" });
     } else if (this.state.score === 9) {
       this.setState({ result: "You Win!" });
       this.setState({ modalText: "You placed all the cities correctly!" });
@@ -89,9 +96,9 @@ class GameScreen extends Component {
     });
   };
 
-  handleClose = () => {
-    this.setState({ modalClass: "modal fade" });
-  };
+  // handleClose = () => {
+  //   this.setState({ modalClass: "modal fade" });
+  // };
 
   handlePlayAgain = () => {
     history.push("/");
@@ -130,7 +137,10 @@ class GameScreen extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <button className="close-button btn" onClick={this.handleClose}>
+                <button
+                  onClick={this.handlePlayAgain}
+                  className="close-button btn"
+                >
                   &times;
                 </button>
                 <h3 className="modal-title">{this.state.result}</h3>
