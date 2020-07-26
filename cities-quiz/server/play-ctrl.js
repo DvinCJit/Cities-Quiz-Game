@@ -3,7 +3,6 @@ const cities = require("./db/capitalCities.json");
 const ObjectId = require("mongodb").ObjectId;
 
 module.exports.postName = (req, res) => {
-  console.log(req.body.value);
   const body = req.body;
 
   if (!body) {
@@ -42,18 +41,16 @@ module.exports.postName = (req, res) => {
 };
 
 module.exports.placeCity = (req, res) => {
-  console.log(req.body);
   const playerId = new ObjectId(req.body[1]);
   const coords = req.body[0];
 
   Play.findById(playerId)
     .then((response) => {
       // Get placed city's coords to measure distance
-      console.log("current", response.current_city);
       const filteredCity = Object.values(cities)[0].filter(
         (city) => city.capitalCity === response.current_city
       );
-      console.log("filtered", filteredCity);
+      // console.log("filtered", filteredCity);
 
       // JavaScript version of the Haversine formula as implemented by the GeoDataSource.com
       distance = (lat1, lon1, lat2, lon2, unit) => {
@@ -86,15 +83,13 @@ module.exports.placeCity = (req, res) => {
         coords.lng,
         "K"
       );
-      console.log(Math.round(measure));
 
-      console.log(response.placed_cities);
       // Filter out already placed cities to generate a new random one
       let citiesArr = [];
       const cityNames = cities.capitalCities.map((c) => {
         citiesArr.push(c.capitalCity);
       });
-      console.log("before", citiesArr);
+      // console.log("before", citiesArr);
       for (let i = 0; i < citiesArr.length; i++) {
         for (let j = 0; j < response.placed_cities.length; j++) {
           if (citiesArr[i] === response.placed_cities[j]) {
@@ -102,7 +97,7 @@ module.exports.placeCity = (req, res) => {
           }
         }
       }
-      console.log("after", citiesArr);
+      // console.log("after", citiesArr);
 
       const item = citiesArr[Math.floor(Math.random() * citiesArr.length)];
       const current_city = item;
