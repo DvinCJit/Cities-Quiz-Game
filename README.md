@@ -27,11 +27,12 @@ You need to have installed on your machine a stable version of [Nodejs](https://
 
 Once you have downloaded or cloned this project follow these steps:
 
-1. Install all dependencies with `npm install`. Once they are all installed you can continue to the next step.
-2. Open your terminal and go to the 'cities-quiz/server' directory with `cd cities-quiz/server/`.
-3. Run `npm start` to launch the server on **localhost:8080**. You won't see anything yet since we still have to setup the frontend.
-4. Open a new terminal and go to the 'cities-quiz' directory. If you are in the 'cities-quiz/server' directory use the command `cd ..`. If you are in the root directory 'cities-quiz-game' use this other command: `cd cities-quiz/`.
-5. Run `npm start` to launch the app on **localhost:3000**. This might take a while. React will automatically open a tab on your browser after this last command and when it is done compiling you will see the Cities Quiz main page displayed on your browser.
+1. Open your terminal (I use "Visual Basic Studio" with the "git bash" terminal installed for windows) and go to the 'cities-quiz/server' directory with `cd cities-quiz/server/`.
+2. Install all dependencies with `npm install`. Once they are all installed you can continue to the next step.
+3. Run `npm start` to launch the server on **localhost:8080**. If you go to **localhost:8080/api/cities** on your browser you will see the cities JSON being served up by the server. You won't see anything else yet since we still have to set up the frontend.
+4. Open a **new terminal** and go to the 'cities-quiz' directory. If you are in the 'cities-quiz/server' directory use the command `cd ..`. If you are in the root directory 'cities-quiz-game' use this other command: `cd cities-quiz/`.
+5. Install all dependencies with `npm install`. This time it is the frontend dependencies. Once they are all installed you can continue to the next step.
+6. Run `npm start` to launch the app on **localhost:3000**. This might take a while. React will automatically open a tab on your browser after this last command and when it is done compiling you will see the Cities Quiz main page displayed on your browser.
 
 For more information about React check out the readme on the 'cities-quiz' folder or go to [React's documentation page](https://reactjs.org/).
 
