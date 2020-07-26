@@ -235,9 +235,63 @@ h1 {
 .info {
   position: absolute;
   z-index: 4;
-  right: 13px;
-  bottom: 34px;
+  top: 87px;
+  left: 7px;
+  /* right: 13px; */
+  /* bottom: 34px; */
   font-family: monospace;
   font-size: 1.3em;
-  color: #17114c;
+  color: #a911d7;
+}
+
+@media screen and (min-width: 800px) {
+  .gameHeader {
+    font-size: 2.5em;
+    top: -30px;
+    left: 20px;
+  }
+
+  .scoreboard {
+    top: 34px;
+    right: 25px;
+    left: auto;
+  }
+
+  .scoreboard-text {
+    margin: 6px 10px;
+  }
+
+  .info {
+    left: auto;
+    right: 25px;
+    top: 52px;
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .info {
+    font-size: 1.5em;
+  }
+
+  .place-city {
+    font-size: 2em;
+    bottom: 25px;
+    right: 25px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .gameHeader {
+    left: 2em;
+  }
+
+  .scoreboard,
+  .info {
+    right: 3em;
+  }
+
+  .place-city {
+    right: 2.5em;
+  }
 }
