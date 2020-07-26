@@ -277,10 +277,6 @@ h1 {
     top: 52px;
     font-size: 1.5em;
   }
-
-  .modal-content {
-    width: 24rem;
-  }
 }
 
 @media screen and (min-width: 641px) {
@@ -292,6 +288,10 @@ h1 {
     font-size: 2em;
     bottom: 25px;
     right: 25px;
+  }
+
+  .modal-content {
+    width: 24rem;
   }
 }
 
