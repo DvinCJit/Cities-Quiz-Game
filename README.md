@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Cities Quiz Game
 
-Technical skils test made from scratch in two days for [United Cuisines](https://www.unitedcuisines.com/en/).
+Technical skills test made from scratch in two days for [United Cuisines](https://www.unitedcuisines.com/en/).
 
 ### Preview
 
