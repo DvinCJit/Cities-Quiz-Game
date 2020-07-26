@@ -46,6 +46,7 @@ module.exports.placeCity = (req, res) => {
 
   Play.findById(playerId)
     .then((response) => {
+      // Get capital cities from JSON
       console.log("current", response.current_city);
       const filteredCity = Object.values(cities)[0].filter(
         (city) => city.capitalCity === response.current_city
@@ -86,7 +87,7 @@ module.exports.placeCity = (req, res) => {
       console.log(Math.round(measure));
 
       console.log(response.placed_cities);
-
+      // Filter out already placed cities to generate a new random one
       let citiesArr = [];
       const cityNames = cities.capitalCities.map((c) => {
         citiesArr.push(c.capitalCity);
@@ -105,7 +106,8 @@ module.exports.placeCity = (req, res) => {
       const current_city = item;
       response.current_city = current_city;
       response.placed_cities.push(current_city);
-
+      // If distance btw cities is greater than 50 send difference
+      // Otherwise, send score
       if (Math.round(measure) <= 50) {
         response.score++;
       } else {
