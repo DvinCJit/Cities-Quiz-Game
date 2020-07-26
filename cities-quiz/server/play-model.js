@@ -7,6 +7,8 @@ const playSchema = new Schema({
   km_left: { type: Number },
   placed_cities: { type: Array },
   current_city: { type: String },
+  prev_coords: { type: Object },
+  distance: { type: Number },
 });
 
 const Play = mongoose.model("Play", playSchema);

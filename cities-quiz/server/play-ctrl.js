@@ -27,6 +27,8 @@ module.exports.postName = (req, res) => {
     km_left: 1500,
     placed_cities: [current_city],
     current_city,
+    prev_coords: [],
+    distance: 0,
   });
 
   if (!play) {
@@ -46,7 +48,7 @@ module.exports.placeCity = (req, res) => {
 
   Play.findById(playerId)
     .then((response) => {
-      // Get capital cities from JSON
+      // Get placed city's coords to measure distance
       console.log("current", response.current_city);
       const filteredCity = Object.values(cities)[0].filter(
         (city) => city.capitalCity === response.current_city
@@ -106,14 +108,17 @@ module.exports.placeCity = (req, res) => {
       const current_city = item;
       response.current_city = current_city;
       response.placed_cities.push(current_city);
-      // If distance btw cities is greater than 50 send difference
-      // Otherwise, send score
+      // If distance btn cities is smaller than 50 send score
+      // Otherwise, send distance in km
       if (Math.round(measure) <= 50) {
         response.score++;
       } else {
         const roundedDist = Math.round(measure);
         response.km_left -= roundedDist;
       }
+
+      response.prev_coords = filteredCity[0];
+      response.distance = measure;
 
       response
         .save()

@@ -9,7 +9,7 @@ mapboxgl.accessToken =
 class GameScreen extends Component {
   constructor(props) {
     super(props);
-    // this.handleClose = this.handleClose.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.state = {
       result: "",
       modalText: "",
@@ -20,37 +20,38 @@ class GameScreen extends Component {
       zoom: 3.5,
       currentCoords: {},
       modalClass: "modal fade",
+      disabled: false,
     };
   }
 
   componentDidMount = () => {
-    const map = new mapboxgl.Map({
+    window.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/judithrn/ckd0gl8210h161in8g3guwz60",
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
-    map.on("move", () => {
+    window.map.on("move", () => {
       this.setState({
-        lng: map.getCenter().lng.toFixed(4),
-        lat: map.getCenter().lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2),
+        lng: window.map.getCenter().lng.toFixed(4),
+        lat: window.map.getCenter().lat.toFixed(4),
+        zoom: window.map.getZoom().toFixed(2),
       });
     });
 
-    const marker = new mapboxgl.Marker({
+    window.marker = new mapboxgl.Marker({
       draggable: true,
     })
       .setLngLat([this.state.lng, this.state.lat])
-      .addTo(map);
+      .addTo(window.map);
 
-    this.setState({ currentCoords: marker.getLngLat() });
+    this.setState({ currentCoords: window.marker.getLngLat() });
     const onDragEnd = () => {
-      const lngLat = marker.getLngLat();
+      const lngLat = window.marker.getLngLat();
       this.setState({ currentCoords: lngLat });
     };
 
-    marker.on("dragend", onDragEnd);
+    window.marker.on("dragend", onDragEnd);
 
     const data = window.localStorage.getItem("play");
     const obj = JSON.parse(data);
@@ -68,11 +69,32 @@ class GameScreen extends Component {
       this.setState({ play: data.data });
     });
 
+    const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+      `You were ${Math.round(this.state.play.distance)} km off from ${
+        this.state.play.prev_coords.capitalCity
+      }.`
+    );
+
+    const elem = document.createElement("div");
+    elem.className = "marker";
+
+    new mapboxgl.Marker(elem)
+      .setLngLat([
+        this.state.play.prev_coords.long,
+        this.state.play.prev_coords.lat,
+      ])
+      .setPopup(popup)
+      .addTo(window.map);
+
+    console.log("map after", window.map);
+    console.log("marker after", window.marker);
+
     if (this.state.play.km_left <= 0) {
       this.setState({ result: "Game Over" });
       this.setState({ modalText: "You run out of kilometres!" });
       this.fetchHighScore();
       this.setState({ modalClass: "modal-visible fade" });
+      this.setState({ disabled: true });
     } else if (
       this.state.play.placed_cities.length === 8 &&
       this.state.play.score !== 9
@@ -81,11 +103,13 @@ class GameScreen extends Component {
       this.setState({ modalText: "Those were all the cities!" });
       this.fetchHighScore();
       this.setState({ modalClass: "modal-visible fade" });
+      this.setState({ disabled: true });
     } else if (this.state.score === 9) {
       this.setState({ result: "You Win!" });
       this.setState({ modalText: "You placed all the cities correctly!" });
       this.fetchHighScore();
       this.setState({ modalClass: "modal-visible fade" });
+      this.setState({ disabled: true });
     }
   };
 
@@ -96,9 +120,9 @@ class GameScreen extends Component {
     });
   };
 
-  // handleClose = () => {
-  //   this.setState({ modalClass: "modal fade" });
-  // };
+  handleClose = () => {
+    this.setState({ modalClass: "modal fade" });
+  };
 
   handlePlayAgain = () => {
     history.push("/");
@@ -109,7 +133,10 @@ class GameScreen extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="gameHeader"> Cities Quiz</h1>
+          <h1 className="gameHeader" onClick={this.handlePlayAgain}>
+            {" "}
+            Cities Quiz
+          </h1>
           <p className="info">Drag marker to {this.state.play.current_city} </p>
         </header>
         <div className="scoreboard">
@@ -129,7 +156,11 @@ class GameScreen extends Component {
           className="mapContainer"
           onClick={this.handleClick}
         />
-        <button className="place-city btn" onClick={this.handlePlaceCity}>
+        <button
+          className="place-city btn"
+          onClick={this.handlePlaceCity}
+          disabled={this.state.disabled}
+        >
           Place City
         </button>
 
@@ -137,10 +168,7 @@ class GameScreen extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <button
-                  onClick={this.handlePlayAgain}
-                  className="close-button btn"
-                >
+                <button onClick={this.handleClose} className="close-button btn">
                   &times;
                 </button>
                 <h3 className="modal-title">{this.state.result}</h3>
@@ -149,6 +177,10 @@ class GameScreen extends Component {
                 <p>{this.state.modalText}</p>
                 <p>High Score: {this.state.highScore}</p>
                 <p>Your Score: {this.state.play.score} </p>
+                <p>
+                  Click on the markers to check your results! Less than 50km off
+                  is a point.
+                </p>
               </div>
               <div className="modal-footer">
                 <button
