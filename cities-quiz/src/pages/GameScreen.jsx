@@ -110,7 +110,7 @@ class GameScreen extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="gameHeader"> Cities Quiz</h1>
-          <p className="info">Drag marker</p>
+          <p className="info">Drag marker to {this.state.play.current_city} </p>
         </header>
         <div className="scoreboard">
           <p className="scoreboard-text">
