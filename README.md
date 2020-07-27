@@ -23,7 +23,7 @@ The high score is the amount of cities you have found.
 
 ### Setup - Production Mode
 
-You need to have installed on your machine a stable version of [Nodejs](https://nodejs.org/en/download/) and [MongoDB](https://www.mongodb.com/try/download/community) to be able to run this project. You need to create a mongodb database and change the name of the connection string in 'server/db/index.js' of this project [Part 3 of this tutorial should be useful.](https://closebrace.com/tutorials/2017-03-02/the-dead-simple-step-by-step-guide-for-front-end-developers-to-getting-up-and-running-with-nodejs-express-and-mongodb). Alternatively you can create a Mongodb Atlas free account and get a cloud hosted database. Paste the uri from Atlas in the mongoose.connect('uri') part of 'server/db/index.js'.
+You need to have installed on your machine a stable version of [Nodejs](https://nodejs.org/en/download/) and [MongoDB](https://www.mongodb.com/try/download/community) to be able to run this project. You need to create a mongodb database and change the name of the connection string in 'server/db/index.js' of this project [Part 3 of this tutorial should be useful](https://closebrace.com/tutorials/2017-03-02/the-dead-simple-step-by-step-guide-for-front-end-developers-to-getting-up-and-running-with-nodejs-express-and-mongodb). Alternatively you can create a Mongodb Atlas free account and get a cloud hosted database. Paste the uri from Atlas in the mongoose.connect('uri') part of 'server/db/index.js'.
 
 Once you have downloaded or cloned this project follow these steps:
 
