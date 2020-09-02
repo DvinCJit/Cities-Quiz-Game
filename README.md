@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Cities Quiz Game
 
-Technical skills test made from scratch in two days for [United Cuisines](https://www.unitedcuisines.com/en/).
+Single page app made from scratch in two days with MERN stack and Mapbox.
 
 ### Preview
 
