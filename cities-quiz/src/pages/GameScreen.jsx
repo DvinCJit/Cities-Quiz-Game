@@ -96,7 +96,7 @@ class GameScreen extends Component {
       this.setState({ modalClass: "modal-visible fade" });
       this.setState({ disabled: true });
     } else if (
-      this.state.play.placed_cities.length === 8 &&
+      this.state.play.placed_cities.length === 10 &&
       this.state.play.score !== 9
     ) {
       this.setState({ result: "Game Over" });

@@ -85,22 +85,17 @@ module.exports.placeCity = (req, res) => {
       );
 
       // Filter out already placed cities to generate a new random one
-      let citiesArr = [];
-      const cityNames = cities.capitalCities.map((c) => {
-        citiesArr.push(c.capitalCity);
+      let citiesArr = cities.capitalCities.map((c) => {
+        return c.capitalCity;
       });
-      // console.log("before", citiesArr);
-      for (let i = 0; i < citiesArr.length; i++) {
-        for (let j = 0; j < response.placed_cities.length; j++) {
-          if (citiesArr[i] === response.placed_cities[j]) {
-            citiesArr.splice(i, 1);
-          }
-        }
-      }
-      // console.log("after", citiesArr);
 
-      const item = citiesArr[Math.floor(Math.random() * citiesArr.length)];
-      const current_city = item;
+      citiesArr = citiesArr.filter((city) => {
+        return !response.placed_cities.includes(city);
+      });
+      console.log(">>> ", citiesArr, response.placed_cities);
+
+      const current_city =
+        citiesArr[Math.floor(Math.random() * citiesArr.length)];
       response.current_city = current_city;
       response.placed_cities.push(current_city);
       // If distance btn cities is smaller than 50 send score
