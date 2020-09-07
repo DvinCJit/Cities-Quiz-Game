@@ -1,8 +1,13 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
+const uri = process.env.ATLAS_URI;
 // const Schema = mongoose.Schema;
+//console.log("ENV!!", process.env);
+
 mongoose.set("debug", true);
 mongoose
-  .connect("mongodb://localhost:27017/mydb", {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
