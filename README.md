@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Cities Quiz Game
 
-Technical skills test made from scratch in two days for [United Cuisines](https://www.unitedcuisines.com/en/).
+Single page app made from scratch in two days with MERN stack and Mapbox.
 
 ### Preview
 
@@ -38,5 +38,4 @@ For more information about React check out the readme on the 'cities-quiz' folde
 
 ### Mapbox
 
-The access token provided in this project is personal and will expire after finishing the interview process for which this project was built.
-To be able to run this application correctly or for future projects you might want to consider signing up to [Mapbox](https://www.mapbox.com/) and getting your own access token.
+The access token provided in this project is expired. To be able to run this application correctly or for future projects you might want to consider signing up to [Mapbox](https://www.mapbox.com/) and getting your own personal access token.
