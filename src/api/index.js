@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL:
+    `https://powerful-anchorage-64847.herokuapp.com/` ||
+    "http://localhost:8080/api",
 });
 
 export const startgame = (data) => apiClient.post("/", data);
