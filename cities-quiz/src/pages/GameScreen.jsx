@@ -3,8 +3,8 @@ import mapboxgl from "mapbox-gl";
 import api from "../api";
 import history from "../history";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoianVkaXRocm4iLCJhIjoiY2pqZWZhaWh5Mm83ZjNxbW14YjYwY3BvdSJ9.dzLHt6jQRGlNH9jFAdhkbg";
+console.log(process.env);
+mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_TOKEN}`;
 
 class GameScreen extends Component {
   constructor(props) {
@@ -31,13 +31,6 @@ class GameScreen extends Component {
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
-    window.map.on("move", () => {
-      this.setState({
-        lng: window.map.getCenter().lng.toFixed(4),
-        lat: window.map.getCenter().lat.toFixed(4),
-        zoom: window.map.getZoom().toFixed(2),
-      });
-    });
 
     window.marker = new mapboxgl.Marker({
       draggable: true,
@@ -45,7 +38,6 @@ class GameScreen extends Component {
       .setLngLat([this.state.lng, this.state.lat])
       .addTo(window.map);
 
-    this.setState({ currentCoords: window.marker.getLngLat() });
     const onDragEnd = () => {
       const lngLat = window.marker.getLngLat();
       this.setState({ currentCoords: lngLat });
@@ -151,11 +143,7 @@ class GameScreen extends Component {
           </p>
         </div>
 
-        <div
-          ref={(el) => (this.mapContainer = el)}
-          className="mapContainer"
-          onClick={this.handleClick}
-        />
+        <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
         <button
           className="place-city btn"
           onClick={this.handlePlaceCity}

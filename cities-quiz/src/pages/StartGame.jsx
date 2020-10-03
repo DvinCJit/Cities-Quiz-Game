@@ -20,6 +20,12 @@ class StartGame extends Component {
     });
   };
 
+  handleKeyPress = (e) => {
+    if (e.charCode === 13) {
+      this.handleClick();
+    }
+  };
+
   render() {
     return (
       <div className="startgame">
@@ -33,6 +39,7 @@ class StartGame extends Component {
               className="input-name"
               value={this.state.value}
               onChange={(e) => this.setState({ value: e.target.value })}
+              onKeyPress={this.handleKeyPress}
             />
             <button className="play-btn btn" onClick={this.handleClick}>
               Play
