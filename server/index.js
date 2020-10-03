@@ -21,4 +21,6 @@ app.get("/api/cities", (req, res) => {
   res.send(cities);
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(process.env.PORT || port, () =>
+  console.log(`Server running on port ${port}`)
+);
