@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const app = express();
 const port = 8080;
 const cities = require("./db/capitalCities.json");
@@ -7,7 +7,10 @@ const db = require("./db");
 
 const playRouter = require("./play-router");
 
-app.use(cors());
+const buildPath = path.join(__dirname, "..", "build");
+app.use(express.static(buildPath));
+
+// app.use(cors());
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", function callback() {
   // eslint-disable-next-line no-console
