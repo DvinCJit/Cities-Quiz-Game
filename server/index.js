@@ -11,6 +11,10 @@ const playRouter = require("./play-router");
 if (process.env.NODE_ENV === "production") {
   const buildPath = path.join(__dirname, "..", "build");
   app.use(express.static(buildPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  });
 }
 
 app.use(cors());
