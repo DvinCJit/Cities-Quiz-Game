@@ -1,17 +1,19 @@
 const express = require("express");
-// const cors = require("cors");
-const path = require("path");
+const cors = require("cors");
+// const path = require("path");
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 const cities = require("./db/capitalCities.json");
 const db = require("./db");
 
 const playRouter = require("./play-router");
 
-const buildPath = path.join(__dirname, "..", "build");
-app.use(express.static(buildPath));
+if (process.env.NODE_ENV === "production") {
+  const buildPath = path.join(__dirname, "..", "build");
+  app.use(express.static(buildPath));
+}
 
-// app.use(cors());
+app.use(cors());
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", function callback() {
   // eslint-disable-next-line no-console
@@ -25,6 +27,4 @@ app.get("/api/cities", (req, res) => {
   res.send(cities);
 });
 
-app.listen(process.env.PORT || port, () =>
-  console.log(`Server running on port ${port}`)
-);
+app.listen(port, () => console.log(`Server running on port ${port}`));
