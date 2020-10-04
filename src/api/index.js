@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL:
-    `https://powerful-anchorage-64847.herokuapp.com/api` ||
+    `https://powerful-anchorage-64847.herokuapp.com/` ||
     "http://localhost:8080/api",
 });
 
